@@ -192,7 +192,6 @@ void Search::WriteCoverageToFileOrDie(const string& file) {
 int runCount = 0;
 void Search::LaunchProgram(const vector<value_t>& inputs) {
   WriteInputToFileOrDie("input", inputs);
-  WriteInputToFileOrDie("input" + patch::to_string(runCount++), inputs);
 
   /*
   pid_t pid = fork();
@@ -222,6 +221,11 @@ void Search::RunProgram(const vector<value_t>& inputs, SymbolicExecution* ex) {
   ifstream in("szd_execution", ios::in | ios::binary);
   assert(in && ex->Parse(in));
   in.close();
+
+  if (ex->inputs().size() > 0) {
+      WriteInputToFileOrDie("input" + patch::to_string(runCount++), ex->inputs());
+  }
+
 
   /*
   for (size_t i = 0; i < ex->path().branches().size(); i++) {
