@@ -22,6 +22,20 @@
 #include "base/yices_solver.h"
 #include "run_crest/concolic_search.h"
 
+#include <string>
+#include <sstream>
+
+namespace patch
+{
+    template < typename T > std::string to_string( const T& n )
+    {
+        std::ostringstream stm ;
+        stm << n ;
+        return stm.str() ;
+    }
+}
+
+
 using std::binary_function;
 using std::ifstream;
 using std::ios;
@@ -175,8 +189,9 @@ void Search::WriteCoverageToFileOrDie(const string& file) {
 }
 
 
+int runCount = 0;
 void Search::LaunchProgram(const vector<value_t>& inputs) {
-  WriteInputToFileOrDie("input", inputs);
+  WriteInputToFileOrDie("input" + patch::to_string(runCount++), inputs);
 
   /*
   pid_t pid = fork();
