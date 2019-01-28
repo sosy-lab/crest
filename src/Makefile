@@ -1,8 +1,8 @@
 
-YICES_DIR=/home/jburnim/yices-1.0.11
+YICES_DIR=/home/leostrakosch/Documents/SV/crest/yices-1.0.40
 
 CC=$(CXX)
-CFLAGS = -I. -I$(YICES_DIR)/include -Wall -O2
+CFLAGS = -I. -I$(YICES_DIR)/include -Wall -O2 -std=gnu++98 -no-pie
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = -L$(YICES_DIR)/lib
 LOADLIBES = -lyices
