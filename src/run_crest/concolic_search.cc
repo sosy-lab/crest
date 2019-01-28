@@ -191,6 +191,7 @@ void Search::WriteCoverageToFileOrDie(const string& file) {
 
 int runCount = 0;
 void Search::LaunchProgram(const vector<value_t>& inputs) {
+  WriteInputToFileOrDie("input", inputs);
   WriteInputToFileOrDie("input" + patch::to_string(runCount++), inputs);
 
   /*
